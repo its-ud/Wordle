@@ -12,8 +12,28 @@ var guessList = ["aahed", "aalii", "aargh", "aarti", "abaca", "abaci", "abacs", 
 
 guessList = guessList.concat(wordList);
 guessList.sort();
-var word = wordList[Math.floor(Math.random()*wordList.length)].toUpperCase();
-console.log(word);
+// var word = wordList[Math.floor(Math.random()*wordList.length)].toUpperCase();
+var word = "";
+// console.log(word);
+// console.log("<----->");
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '388395ef92msh28da88bcfccd8b8p1a6d80jsn9a8cbd88edcb',
+		'X-RapidAPI-Host': 'random-words5.p.rapidapi.com'
+	}
+};
+
+fetch('https://random-words5.p.rapidapi.com/getMultipleRandom?count=1&wordLength=5', options)
+    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+        word = response[0];
+        console.log(word);
+        word = word.toUpperCase();
+    })
+    .catch(err => console.error(err));
 
 window.onload = function(){
     intialize();
